@@ -1,0 +1,21 @@
+<header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 bg-white shadow-md">
+  <div class="max-w-7xl mx-auto flex justify-between h-16 items-center">
+    <!-- Logo / Nome -->
+    <div class="text-lg font-bold text-gray-800">
+      Nosso Contador
+    </div>
+
+    <!-- Menu -->
+    <nav class="flex space-x-8">
+      <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
+      <a href="/contador" class="text-gray-700 hover:text-blue-600 font-medium">Contador</a>
+    </nav>
+  </div>
+</header>
+
+<main class="pt-20 px-4 py-6 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-2xl">
+    <.flash_group flash={@flash} />
+    {@inner_content}
+  </div>
+</main>
