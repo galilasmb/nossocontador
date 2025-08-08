@@ -2,14 +2,33 @@
   <div class="max-w-7xl mx-auto flex justify-between h-16 items-center">
     <!-- Logo / Nome -->
     <div class="text-lg font-bold text-gray-800">
-      Nosso Contador
+      <%= gettext("Nosso Contador") %>
     </div>
 
     <!-- Menu -->
     <nav class="flex space-x-8">
-      <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
-      <a href="/contador" class="text-gray-700 hover:text-blue-600 font-medium">Contador</a>
+      <.link navigate={~p"/?locale=#{@locale}"} class="text-gray-700 hover:text-blue-600 font-medium">
+        <%= gettext("Início") %>
+      </.link>
+      <.link navigate={~p"/contador?locale=#{@locale}"} class="text-gray-700 hover:text-blue-600 font-medium">
+        <%= gettext("Contador") %>
+      </.link>
     </nav>
+
+    <!-- Botão trocar idioma -->
+    <button
+      phx-click="toggle_locale"
+      class="ml-4 px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded"
+      aria-label={gettext("Toggle Language")}
+    >
+      <%= if @locale == "pt" do %>
+        🇵🇹
+      <% else %>
+        🇺🇸
+      <% end %>
+      <span class="ml-1 font-semibold"><%= String.upcase(@locale || "pt") %></span>
+    </button>
+
   </div>
 </header>
 

@@ -50,4 +50,5 @@ defmodule ContadorWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
   plug ContadorWeb.Router
+
 end

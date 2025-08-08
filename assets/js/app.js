@@ -6,37 +6,32 @@ import topbar from "../vendor/topbar"
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 
 let Hooks = {}
-
 Hooks.CounterEffect = {
   updated() {
     let countElement = this.el
 
-    // Efeito visual
     countElement.classList.add("scale-125", "transition", "duration-300")
-    setTimeout(() => {
-      countElement.classList.remove("scale-125")
-    }, 300)
+    setTimeout(() => countElement.classList.remove("scale-125"), 300)
 
-    // Exibir mensagem na tela
-    let msg = document.createElement("div")
-    msg.innerText = `O contador agora é: ${countElement.innerText}`
-    msg.style.position = "fixed"
-    msg.style.bottom = "20px"
-    msg.style.right = "20px"
-    msg.style.background = "rgba(0, 0, 0, 0.8)"
-    msg.style.color = "#fff"
-    msg.style.padding = "10px 15px"
-    msg.style.borderRadius = "8px"
-    msg.style.fontSize = "14px"
-    msg.style.zIndex = "9999"
-    document.body.appendChild(msg)
+    let msg = countElement.dataset.message || `O contador agora é: ${countElement.innerText}`
 
-    // Remove a mensagem após 2 segundos
-    setTimeout(() => {
-      msg.remove()
-    }, 1000)
+    let toast = document.createElement("div")
+    toast.innerText = msg
+    toast.style.position = "fixed"
+    toast.style.bottom = "20px"
+    toast.style.right = "20px"
+    toast.style.background = "rgba(0, 0, 0, 0.8)"
+    toast.style.color = "#fff"
+    toast.style.padding = "10px 15px"
+    toast.style.borderRadius = "8px"
+    toast.style.fontSize = "14px"
+    toast.style.zIndex = "9999"
+    document.body.appendChild(toast)
+
+    setTimeout(() => toast.remove(), 2000)
   }
 }
+
 
 let liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
@@ -51,3 +46,16 @@ window.addEventListener("phx:page-loading-stop", _info => topbar.hide())
 
 liveSocket.connect()
 window.liveSocket = liveSocket
+
+
+window.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-locale-toggle]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const currentLocale = document.documentElement.lang || "pt"
+      const nextLocale = currentLocale === "pt" ? "en" : "pt"
+      const url = new URL(window.location)
+      url.searchParams.set("locale", nextLocale)
+      window.location.href = url.toString()
+    })
+  })
+})

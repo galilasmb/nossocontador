@@ -8,6 +8,7 @@ defmodule ContadorWeb.Router do
     plug :put_root_layout, html: {ContadorWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug ContadorWeb.Plugs.Locale
   end
 
   pipeline :api do
