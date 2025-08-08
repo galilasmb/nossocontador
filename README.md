@@ -36,6 +36,7 @@ Visit [`http://localhost:4000`](http://localhost:4000) from your browser.
 * Locale selection handled via URL query parameter, session, or browser settings.
 * Language toggle button with flag icons in the UI (Portuguese / English).
 * Notification message ("The counter is now: ...") displayed via JavaScript Hook with translated content.
+* List the last five counter values.
 
 ## Project Structure
 
